@@ -10,18 +10,10 @@ from skimage.transform import rescale, resize, downscale_local_mean
 import tensorflow as tf
 
 
-#
-#
-# img_path = 'elephant.jpg'
-# img = image.load_img(img_path, target_size=(224, 224))
-# x = image.img_to_array(img)
-# x = np.expand_dims(x, axis=0)
-# x = preprocess_input(x)
-#
-#
+
 #TYPES = ["Dress", "Skirt", "UpperBody", "LowerBody"]
 TYPES = []
-directoryPath = "/Users/ckanitkar/Desktop/img_npy_final/"
+DIRECTORY_PATH = "/Users/ckanitkar/Desktop/img_npy_final/"
 
 
 base_model = ResNet50()
@@ -29,14 +21,14 @@ base_model = ResNet50()
 model = Model(inputs=base_model.input, outputs=base_model.output)
 print(model.summary())
 
-for filename in glob.iglob(directoryPath + '/**/*_photos.npy', recursive=True):
+for filename in glob.iglob(DIRECTORY_PATH + '/**/*_photos.npy', recursive=True):
     array = np.load(filename).transpose([0,2,3,1])
     name = filename.split('/')
     photo_type = "consumer" if "consumer" in name[-1] else "shop"
     category2 = name[-2]
     category1 = name[-3]
     if category2 in TYPES:
-        newFileName = directoryPath + category1 + "/" + category2 + "/" + photo_type + "_ResNet50_features"
+        newFileName = DIRECTORY_PATH + category1 + "/" + category2 + "/" + photo_type + "_ResNet50_features"
         print(filename)
         print (newFileName)
         print (array.shape)
