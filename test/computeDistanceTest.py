@@ -1,30 +1,33 @@
 import unittest
 import numpy as np
-from common.computeAccuracy import computeAccuracy
+from common.computeDistanceBetweenExtractedFeatures import *
 
-class TestComputeAccuracy(unittest.TestCase):
+class TestComputeDistance(unittest.TestCase):
 
     def setUp(self):
-        self.distances = np.array([
-            [4, 20, 2, 12],
-            [36, 300, 232, 999],
-            [44, 2000, 25, 23]
+        self.consumer_features = np.array([
+            [1, 3, 5, 2],
+            [5, 10, 2, 4],
+            [1, 1, 1, 4]
         ])
-        self.shop_labels = np.array(['id_1', 'id_2', 'id_3', 'id_4'])
-        self.consumer_labels = np.array(['id_2', 'id_1', 'id_3'])
+        self.shop_features = np.array([
+            [1, 3, 5, 2],
+            [5, 10, 2, 4],
+            [1, 1, 1, 4],
+            [12, 4, 2, 20]
+        ])
+    def testComputeManhattanDistance(self):
+        distances = computeDistances(self.consumer_features, self.shop_features, metric='cityblock')
+        expected_distances = np.array([
+            [0, 16, 8, 33],
+            [16, 0, 14, 29],
+            [8, 14, 0, 31]
+        ])
+        np.testing.assert_array_equal(distances, expected_distances)
 
-    def testAccuracyKEquals1(self):
-        correct, total, accuracy = computeAccuracy(self.distances, self.consumer_labels, self.shop_labels, k = 1)
-        self.assertEqual((correct, total, accuracy), (1, 3, 1/3))
-
-    def testAccuracyKEquals2(self):
-        correct, total, accuracy = computeAccuracy(self.distances, self.consumer_labels, self.shop_labels, k = 2)
-        self.assertEqual((correct, total, accuracy), (2, 3, 2/3))
-
-    def testAccuracyKEquals4(self):
-        correct, total, accuracy = computeAccuracy(self.distances, self.consumer_labels, self.shop_labels, k=4)
-        self.assertEqual((correct, total, accuracy), (3, 3, 1))
-
+    def testComputeDistanceWithTrainedModel(self):
+        # TODO: Fill this out
+        pass
 
 if __name__ == '__main__':
     unittest.main()

@@ -8,6 +8,7 @@ def computeDistances(consumer_features, shop_features, metric='euclidean', model
     assert consumer_features.shape[1] == shop_features.shape[1], 'Distances must be a numpy array of consumer * shop'
 
     if model is not None:
+      # TODO : Fill this out
       pass
     else:
       return scidist.cdist(consumer_features, shop_features, metric=metric)
