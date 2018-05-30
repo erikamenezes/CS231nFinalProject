@@ -11,6 +11,11 @@ import tensorflow as tf
 
 
 
+def extract_features(DIRECTORY_PATH, base_model, layer_name):
+    model = Model(inputs=base_model.input, outputs=base_model.get_layer(layer_name).output)
+
+
+
 #TYPES = ["Dress", "Skirt", "UpperBody", "LowerBody"]
 TYPES = []
 DIRECTORY_PATH = "/Users/ckanitkar/Desktop/img_npy_final/"
