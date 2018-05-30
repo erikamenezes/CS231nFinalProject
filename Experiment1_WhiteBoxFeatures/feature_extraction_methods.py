@@ -1,6 +1,7 @@
 import cv2
 import matplotlib
 import numpy as np
+from .ColorCovarianceVectorImplementation import *
 
 '''
 Contains all method used to extract white box features. Each function takes in an rgb image
@@ -107,3 +108,6 @@ def corners(im):
     return dst.flatten()
 
 
+def ccvConcat(img):
+    alpha, beta = ccv(img)
+    return np.concatenate((alpha, beta))
