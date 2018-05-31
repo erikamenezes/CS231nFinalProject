@@ -2,6 +2,7 @@ import cv2
 import matplotlib
 import numpy as np
 from .ColorCovarianceVectorImplementation import *
+from scipy.ndimage import uniform_filter
 
 '''
 Contains all method used to extract white box features. Each function takes in an rgb image

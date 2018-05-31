@@ -11,59 +11,21 @@ import tensorflow as tf
 from Image_File_IO.extract_features_iterator import extract_features_iterator
 
 
-def extract_features_white_box(DIRECTORY_PATH, includedCategories=['Dress', 'Skirt', 'UpperBody', 'LowerBody'], imageSize = None):
-    extract_features_iterator(DIRECTORY_PATH, includedCategories = includedCategories, imageSize = imageSize, isWhiteboxExtraction=True)
+def extract_features_white_box(DIRECTORY_PATH,
+                               includedCategories=['Dress', 'Skirt', 'UpperBody', 'LowerBody'],
+                               imageReshape = None,
+                               extractor_functions = None):
+
+    extract_features_iterator(DIRECTORY_PATH,
+                              includedCategories = includedCategories,
+                              imageReshape = imageReshape,
+                              extractor_functions=extractor_functions,
+                              isWhiteboxExtraction=True)
 
 
 
 def extract_features_pre_trained():
     pass
-
-
-
-
-
-
-
-#TYPES = ["Dress", "Skirt", "UpperBody", "LowerBody"]
-TYPES = []
-DIRECTORY_PATH = "/Users/ckanitkar/Desktop/img_npy_final/"
-
-
-base_model = ResNet50()
-#model = Model(inputs=base_model.input, outputs=base_model.get_layer("avg_pool").output)
-model = Model(inputs=base_model.input, outputs=base_model.output)
-print(model.summary())
-
-for filename in glob.iglob(DIRECTORY_PATH + '/**/*_photos.npy', recursive=True):
-    array = np.load(filename).transpose([0,2,3,1])
-    name = filename.split('/')
-    photo_type = "consumer" if "consumer" in name[-1] else "shop"
-    category2 = name[-2]
-    category1 = name[-3]
-    if category2 in TYPES:
-        newFileName = DIRECTORY_PATH + category1 + "/" + category2 + "/" + photo_type + "_ResNet50_features"
-        print(filename)
-        print (newFileName)
-        print (array.shape)
-        #plt.imshow(array[0])
-        #plt.show()
-        #esized = image.img_to_array(image.array_to_img(array)).resize((224,224))
-
-
-        resized_tesnor = tf.image.resize_images(array, (224, 224), method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
-        with tf.Session().as_default():
-            resized = resized_tesnor.eval()
-
-        print(resized.shape)
-        #print(resized.dtype)
-        #
-        #print(resized.shape)
-
-        print("Extracting features")
-        output = model.predict(resized, verbose=1)
-        print(output.shape)
-        np.save(newFileName, output)
 
 
 
