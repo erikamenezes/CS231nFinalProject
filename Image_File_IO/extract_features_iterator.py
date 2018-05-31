@@ -4,6 +4,7 @@ import numpy as np
 import glob
 import tensorflow as tf
 from common.concatenate_extracted_features_with_feature_functions import extract_features_concat
+POSSIBLE_CATEGORIES = ['Dress', 'Skirt', 'UpperBody', 'LowerBody']
 
 
 def extract_features_iterator(DIRECTORY_PATH, model = None, layer_name = None, includedCategories=['Dress', 'Skirt', 'UpperBody', 'LowerBody'], imageReshape = None, isWhiteboxExtraction = True, extractor_functions = None):
@@ -21,10 +22,9 @@ def extract_features_iterator(DIRECTORY_PATH, model = None, layer_name = None, i
         name = filename.split('/')
         photo_type = "consumer" if "consumer" in name[-1] else "shop"
         subCategory = name[-2]
-        parentCategory = name[-3]
-        if subCategory in includedCategories:
-            newFileName = DIRECTORY_PATH + parentCategory + "/" + subCategory + "/" + photo_type + file_ext
-
+        if subCategory not in POSSIBLE_CATEGORIES or subCategory in includedCategories:
+            newFileName = "/".join(name[:-1]) + "/" + photo_type + file_ext
+            print(newFileName)
             print("Input file {}, Array Shape: {} \n".format(filename, array.shape))
 
             if(imageReshape is not None):

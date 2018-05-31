@@ -4,7 +4,7 @@ from keras.applications import ResNet50
 
 directory = "/Users/ckanitkar/Desktop/img_npy_final_test/"
 
-#extract_features_white_box(directory, includedCategories=["Skirt"], extractor_functions=[hog_feature], imageReshape=224)
+extract_features_white_box(directory, includedCategories=["Skirt"], extractor_functions=[hog_feature])
 
 
-extract_features_pre_trained(directory, includedCategories=["Skirt"], imageReshape = 224, model = ResNet50(), layer_name="avg_pool")
+#extract_features_pre_trained(directory, includedCategories=["Skirt"], imageReshape = 224, model = ResNet50(), layer_name="avg_pool")
