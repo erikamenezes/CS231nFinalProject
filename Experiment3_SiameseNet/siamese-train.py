@@ -135,7 +135,9 @@ output = Dense(2048, activation='relu')(input)
 output = Dense(1, activation='sigmoid')(output)
 siamese_net = Model(inputs=input, outputs=output)
 siamese_net.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['binary_accuracy'])
-siamese_net.fit(distance, targets, validation_split=.1)
+#siamese_net.fit(distance, targets, validation_split=.1)
+print(type(siamese_net))
+
 
 # prediction = Dense(1,activation='sigmoid',bias_initializer=b_init)(L1_distance)
 # siamese_net = Model(inputs=[left_input,right_input],outputs=prediction)
