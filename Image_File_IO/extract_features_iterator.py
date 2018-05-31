@@ -1,9 +1,12 @@
 
-from keras.models import Model
-import numpy as np
 import glob
+
+import numpy as np
 import tensorflow as tf
-from common.concatenate_extracted_features_with_feature_functions import extract_features_concat
+from keras.models import Model
+
+from common.helpers.concatenate_extracted_features_with_feature_functions import extract_features_concat
+
 POSSIBLE_CATEGORIES = ['Dress', 'Skirt', 'UpperBody', 'LowerBody']
 
 
