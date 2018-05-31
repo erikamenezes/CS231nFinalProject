@@ -5,7 +5,7 @@ import numpy as np
  Generates feature vectors for array of images using providing feature functions. 
 '''
 
-def extract_features(imgs, feature_fns, verbose=True):
+def extract_features_concat(imgs, feature_fns, verbose=True):
   """
   Given pixel data for images and several feature functions that can operate on
   single images, apply all feature functions to all images, concatenating the

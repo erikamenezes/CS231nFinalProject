@@ -8,11 +8,20 @@ import glob
 import matplotlib.pyplot as plt
 from skimage.transform import rescale, resize, downscale_local_mean
 import tensorflow as tf
+from Image_File_IO.extract_features_iterator import extract_features_iterator
+
+
+def extract_features_white_box(DIRECTORY_PATH, includedCategories=['Dress', 'Skirt', 'UpperBody', 'LowerBody'], imageSize = None):
+    extract_features_iterator(DIRECTORY_PATH, includedCategories = includedCategories, imageSize = imageSize, isWhiteboxExtraction=True)
 
 
 
-def extract_features(DIRECTORY_PATH, base_model, layer_name):
-    model = Model(inputs=base_model.input, outputs=base_model.get_layer(layer_name).output)
+def extract_features_pre_trained():
+    pass
+
+
+
+
 
 
 
