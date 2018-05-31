@@ -24,8 +24,17 @@ def extract_features_white_box(DIRECTORY_PATH,
 
 
 
-def extract_features_pre_trained():
-    pass
+def extract_features_pre_trained(DIRECTORY_PATH,
+                                 model,
+                                 layer_name,
+                                 includedCategories=['Dress', 'Skirt', 'UpperBody', 'LowerBody'],
+                                 imageReshape = 224):
+    extract_features_iterator(DIRECTORY_PATH,
+                              model=model,
+                              layer_name=layer_name,
+                              includedCategories = includedCategories,
+                              imageReshape = imageReshape,
+                              isWhiteboxExtraction=False)
 
 
 
